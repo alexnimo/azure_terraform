@@ -1,0 +1,3 @@
+**/.terraform/**
+*.exe
+F5-Workshop/qa-sb/.terraform/**
