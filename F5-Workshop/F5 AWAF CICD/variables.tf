@@ -1,3 +1,24 @@
+variable "vnets" {
+  type     = map(object{
+    address_space = string
+    location      = string
+  })
+  description = "vnet settings"
+  default = {}
+}
+
+variable "subnets" {
+  type =  list(any)
+  description = "subnets in each vnet"
+  default = {}
+}
+
+variable "subnetmask" {
+  type =  list(any)
+  description = "subnet mask in each subnet"
+  default = {}
+}
+
 variable "specification" {
   # must select a region that supports availability zones
   # https://docs.microsoft.com/en-us/azure/availability-zones/az-overview
@@ -40,6 +61,11 @@ variable "telemetrysvr_instance_type" {
 
 variable "prefix" {
   default = "nimo-f5-lab"
+}
+
+variable "location" {
+  description = "default location"
+  default     = "eastus2"
 }
 
 variable "storage_acccount" {

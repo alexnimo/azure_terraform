@@ -4,7 +4,7 @@ locals {
 
 # Create F5 BIGIP VMs 
 resource "azurerm_linux_virtual_machine" "f5bigip" {
-  count                           = local.ltm_instance_count
+  count                           = var.
   name                            = format("%s-bigip-%s-%s", var.prefix, count.index, random_id.randomId.hex)
   location                        = azurerm_resource_group.main.location
   resource_group_name             = azurerm_resource_group.main.name

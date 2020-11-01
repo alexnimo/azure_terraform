@@ -12,8 +12,8 @@ resource "azurerm_key_vault" "key-vault" {
   enabled_for_disk_encryption     = var.enabled_for_disk_encryption
   enabled_for_template_deployment = var.enabled_for_template_deployment
 
-  tenant_id = data.azurerm_client_config.current.tenant_id
-  #object_id = data.azurerm_client_config.current.object_id
+  tenant_id = var.tenant_id
+  object_id = var.ad_object_id
   sku_name  = var.sku_name
   tags      = var.tags
 
@@ -54,6 +54,10 @@ resource "azurerm_key_vault_access_policy" "policy" {
   secret_permissions      = lookup(each.value, "secret_permissions")
   certificate_permissions = lookup(each.value, "certificate_permissions")
   storage_permissions     = lookup(each.value, "storage_permissions")
+  
+    lifecycle {
+    create_before_destroy = true
+  }
 }
 
 # Generate a random password
